@@ -1,20 +1,18 @@
               
-                   ##### visualized dataset ########
+                   ##### basic vizualization ########
 
 
 setwd("C:/Users/Administrator/Downloads/saidatasets")
 fin <- read.csv("Future-500.csv",na.strings = c(""))
 getwd()
-fin_backup <- fin
-fin_backup
 head(fin)
 tail(fin)
 str(fin)
 dim(fin)
 summary(fin)
-View(fin)  #from here we understand that id and inception should be facotors but it was given int"
+View(fin)  #from here we understand that id and inception should be facotors which are by default of integer type"
  
-"so now that change those columns into factor and then override that column"
+#so now that change those columns into factor and then override that column
 
 fin$ID<- factor(fin$ID)
 fin$ID
@@ -44,7 +42,7 @@ class(fin$Inception)
 #View(fin)
 
 #gsub doesnt work since the values are regular expressions, so 
-#use stringr package to repace then and then override them
+#use stringr package to replace them and then override them
 
 
 library("stringr")
@@ -93,13 +91,7 @@ summary(fin[complete.cases(fin),])
 View(fin)
 #now the data is clean without NA's and mossing values.
 
-?par
-
-median(fin[,"Employees"])
-med_emp_retail <- median(fin[fin$Industry=="Retail","Employees"])
-
-
-#visualize using ggplot
+#visualize using ggplot which shows industry trends fro expenses-revenue relationship
 
 library(ggplot2)
 p <- ggplot(data=fin)
@@ -119,6 +111,7 @@ d + geom_point() + geom_smooth()
 
 d + geom_point() + geom_smooth(fill=NA, size=1.1)
 
+#here the boxplot is used to show growth by industry 
 f <- ggplot(data = fin, aes(x = Revenue, y = Growth, colour = Industry ))
 f
 
@@ -128,7 +121,7 @@ f + geom_boxplot(size = 0.5)
 f + geom_jitter() + geom_boxplot(size = 0.5)
 
 f + geom_jitter() + geom_boxplot(size = 0.5, alpha = 0.3)
-f + geom_jitter() + geom_boxplot(size = 0.5, alpha = 0.3, outlier.colour = NA)
+
 
 
 
